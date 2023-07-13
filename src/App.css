@@ -1,0 +1,12 @@
+.App {
+  margin:10em;
+  padding: 5em;
+}
+
+ul {
+  text-align: center;
+}
+
+h1, h2, h3, p, button {
+  color: #3C3431;
+}
