@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 const Grid = styled.div`
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 56% auto;
     grid-column-gap: calc(10em/16);
 
 `;

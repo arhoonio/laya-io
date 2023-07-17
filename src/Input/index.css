@@ -1,0 +1,13 @@
+.single-tag {
+    padding:0.5em;
+    position:relative;
+    float:left;
+    vertical-align:middle;
+    background-color: #3C343110;
+    border-radius: 10px;
+    margin-right:0.5em;
+}
+
+.autofill {
+    width:0;
+}

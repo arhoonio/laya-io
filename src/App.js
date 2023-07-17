@@ -3,38 +3,34 @@ import "./App.css";
 import Grid from "./Grid";
 import Block from "./Card/Block";
 import Section from "./Card/Section";
-import Button from "./Button";
 import Input from "./Input";
+import { useRef } from "react";
 
 function App() {
 
-  const [count, setCount] = useState("nadai");
-  const [detailName, setDetailName] = useState("detail");
+    const childInputRef = useRef(null);
+
+    const focusChild = () => {
+        childInputRef.current && childInputRef.current.focus()
+      }
 
     return (
         <div className="App">
-          <h2>laya.io</h2>
+          <ul className="navbar">
+            <li className="logo"><h2>laya.io</h2></li>
+            <li className="navoption"><a href="#">video + audio annotation</a></li>
+            <li className="navoption"><a href="#">about</a></li>
+          </ul>
           <Grid>
             <Section> notes
-              <Block>nadai
+              <Block onClick={focusChild}>
+                <Input childInputRef={childInputRef}/>
               </Block>
-              <Block>korvai</Block>
-              <ul>
-                <Button onClick={() => setCount("nadai")}>
-                  new nadai
-                </Button>
-                <Button onClick={() => setCount("korvai")}>
-                  new korvai
-                </Button>
-                <Button onClick={() => setCount("theermanam")}>
-                  new theermanam
-                </Button>
-              </ul>
+              <Block onClick={focusChild}><Input childInputRef={childInputRef}/></Block>
+              <Block onClick={focusChild}><Input childInputRef={childInputRef}/></Block>
+
             </Section>
-            <Section>detail 
-              <Block>poorvangam</Block> 
-              <Block>madhyangam</Block> 
-              <Block>uttarangam</Block> 
+            <Section> detail 
             </Section>
           </Grid>
         </div>

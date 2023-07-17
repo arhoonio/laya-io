@@ -8,11 +8,9 @@ const Section = styled.div`
     padding: 0.75em;
     padding-top: 0.5em;
     padding-bottom: 0;
-    display: flex;
-    flex-flow: column wrap;
+    display: block;
     text-align: left;
     transition: 0.25s ease-in-out;
-    box-sizing: border-box;
     cursor: pointer;
     :hover {
         //transition: 0.25s ease-in-out;

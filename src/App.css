@@ -1,12 +1,44 @@
 .App {
-  margin:10em;
-  padding: 5em;
+  min-width: 840px;
+  padding:10em;
+}
+
+.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display:block;
 }
 
 ul {
   text-align: center;
+  padding:0;
+}
+
+.navoption {
+  float:right;
+  display: table-cell;
+}
+
+li a {
+  display: block;
+  margin:0.75em 0.5em;
+  padding: 0 0.25em;
+  color: #3C3431;
+  text-decoration: none;
+}
+
+.logo {
+  float: left;
+  margin:0;
 }
 
 h1, h2, h3, p, button {
   color: #3C3431;
+}
+
+.rti--container {
+  background-color: #3C3431;
+  margin: 0.5em 0;
 }
