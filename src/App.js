@@ -1,10 +1,14 @@
 import React, {useState} from "react";
 import "./App.css";
-import Grid from "./Grid";
-import Block from "./Card/Block";
-import Section from "./Card/Section";
-import Input from "./Input";
+import Grid from "./Components/Grid";
+import Block from "./Components/Card/Block";
+import Section from "./Components/Card/Section";
+import Input from "./Components/Input";
 import { useRef } from "react";
+import ThalamGrid from "./Components/Grid/ThalamGrid";
+import data from "./Data/korvaiDetail.js";
+import Tag from "./Components/Tag";
+import KarvaiTag from "./Components/KarvaiTag";
 
 function App() {
 
@@ -28,9 +32,13 @@ function App() {
               </Block>
               <Block onClick={focusChild}><Input childInputRef={childInputRef}/></Block>
               <Block onClick={focusChild}><Input childInputRef={childInputRef}/></Block>
-
             </Section>
-            <Section> detail 
+            <Section> detail
+              <ThalamGrid>
+                {data.content.poorvangam.map((tag) => tag.type !== "karvai" ? <Tag>{tag.value}</Tag> : <KarvaiTag>{tag.value}</KarvaiTag>)}
+                {data.content.madhyangam.map((tag) => tag.type !== "karvai" ? <Tag>{tag.value}</Tag> : <KarvaiTag>{tag.value}</KarvaiTag>)}
+                {data.content.uttarangam.map((tag) => tag.type !== "karvai" ? <Tag>{tag.value}</Tag> : <KarvaiTag>{tag.value}</KarvaiTag>)}
+              </ThalamGrid>
             </Section>
           </Grid>
         </div>

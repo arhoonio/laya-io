@@ -34,8 +34,18 @@ const Index = styled.span`
 
 const Tags = ({childInputRef, props}) => {
 
+    const Tag = styled.span`
+    padding:0.5em;
+    position:relative;
+    float:left;
+    vertical-align:middle;
+    background-color: #3C343110;
+    border-radius: 10px;
+    margin-right:0.5em;
+`
+
     const [tags, setTags] = React.useState([]);
-    const [error, setError] = React.useState("");
+    // const [error, setError] = React.useState("");
     const [inputcontent, setInputcontent] = React.useState("type here...");
 
     const handleTags =  (event) => {
@@ -44,18 +54,18 @@ const Tags = ({childInputRef, props}) => {
         if (event.key === " " && text !== "") {
             setTags([...tags, inputcontent]);
         }
-        else if (event.key === "Backspace" && text == 0){
+        else if (event.key === "Backspace" && text === 0){
             const tagsCopy = [...tags];
             tagsCopy.pop();
             event.preventDefault();
             setTags(tagsCopy);
         }
-        else if(tags.length < 1 && event.key === "Backspace"){
-            setError("Since there is no tags you can't able to delete any tags");
-        }
-        else if(text === "" && event.key === " "){
-            setError("The tag should be one character long!");
-        }
+        // else if(tags.length < 1 && event.key === "Backspace"){
+        //     setError("Since there is no tags you can't able to delete any tags");
+        // }
+        // else if(text === "" && event.key === " "){
+        //     setError("The tag should be one character long!");
+        // }
         else if (event.key === "Enter") {
 
         }
@@ -69,7 +79,7 @@ const Tags = ({childInputRef, props}) => {
     return (<Input>
     {tags.map((tag, index) => (
         <div key={index}>
-            <span className="single-tag" onDoubleClick={() => removeTags(index)}>{tag}</span>
+            <Tag onDoubleClick={() => removeTags(index)}>{tag}</Tag>
         </div>
     ))}
     
@@ -81,7 +91,6 @@ const Tags = ({childInputRef, props}) => {
             contentEditable
             list="autofill"
             onInput={(e) => setInputcontent(e.target.innerHTML)}
-            
         >
         </Index>
     </Input>
