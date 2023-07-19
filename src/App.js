@@ -8,7 +8,7 @@ import { useRef } from "react";
 import ThalamGrid from "./Components/Grid/ThalamGrid";
 import data from "./Data/korvaiDetail.js";
 import Tag from "./Components/Tag";
-import KarvaiTag from "./Components/KarvaiTag";
+import KanakkuTag from "./Components/KanakkuTag";
 
 function App() {
 
@@ -17,6 +17,21 @@ function App() {
     const focusChild = () => {
         childInputRef.current && childInputRef.current.focus()
       }
+    
+    function splitKanakkuTags(fullSollu, value, karvai) {
+
+      var sollu = fullSollu.split("-");
+      var tags = []
+
+      for (var i = 0; i < value; i++){
+        tags.push(<KanakkuTag 
+          karvai={karvai} 
+          value={value}>{sollu[i]}
+        </KanakkuTag>); 
+      }
+
+      return tags
+    };
 
     return (
         <div className="App">
@@ -35,9 +50,19 @@ function App() {
             </Section>
             <Section> detail
               <ThalamGrid>
-                {data.content.poorvangam.map((tag) => tag.type !== "karvai" ? <Tag>{tag.value}</Tag> : <KarvaiTag>{tag.value}</KarvaiTag>)}
-                {data.content.madhyangam.map((tag) => tag.type !== "karvai" ? <Tag>{tag.value}</Tag> : <KarvaiTag>{tag.value}</KarvaiTag>)}
-                {data.content.uttarangam.map((tag) => tag.type !== "karvai" ? <Tag>{tag.value}</Tag> : <KarvaiTag>{tag.value}</KarvaiTag>)}
+
+                {data.content.poorvangam.map((tag) => (tag.type !== "karvai" && tag.type !== "kanakku") 
+                  ? <Tag>{tag.value}</Tag> 
+                  : splitKanakkuTags(tag.sollu, tag.value, tag.type==="karvai"? true : false))}
+
+                {data.content.madhyangam.map((tag) => (tag.type !== "karvai" && tag.type !== "kanakku") 
+                  ? <Tag>{tag.value}</Tag> 
+                  : splitKanakkuTags(tag.sollu, tag.value, tag.type==="karvai"? true : false))}
+
+                {data.content.uttarangam.map((tag) => (tag.type !== "karvai" && tag.type !== "kanakku") 
+                  ? <Tag>{tag.value}</Tag> 
+                  : splitKanakkuTags(tag.sollu, tag.value, tag.type==="karvai"? true : false))}
+
               </ThalamGrid>
             </Section>
           </Grid>
