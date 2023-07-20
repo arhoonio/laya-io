@@ -42,6 +42,44 @@ function App() {
       return tags
     };
 
+    function renderKorvai () {
+
+      var allTags = []
+
+      data.content.poorvangam.map((tag) => (tag.type !== "karvai" && tag.type !== "kanakku") 
+      ? allTags.push(<Tag>{tag.value}</Tag>)
+      : splitKanakkuTags(tag.sollu, tag.value, tag.type==="karvai"? true : false).map((tag) => allTags.push(tag)))
+
+      data.content.madhyangam.map((tag) => (tag.type !== "karvai" && tag.type !== "kanakku") 
+      ? allTags.push(<Tag>{tag.value}</Tag>)
+      : splitKanakkuTags(tag.sollu, tag.value, tag.type==="karvai"? true : false).map((tag2) => allTags.push(tag2)))
+
+      data.content.uttarangam.map((tag) => (tag.type !== "karvai" && tag.type !== "kanakku") 
+      ? allTags.push(<Tag>{tag.value}</Tag>)
+      : splitKanakkuTags(tag.sollu, tag.value, tag.type==="karvai"? true : false).map((tag2) => allTags.push(tag2)))
+      
+    
+      function renderRow (start) {
+        var rowElms = []
+        for (var i = 0; i < data.content.cols; i++){
+          rowElms.push( <td>
+            {allTags[start + i]}
+          </td>)
+        }
+        return rowElms;
+      }
+
+      var fullElms = []
+
+      for (var start=0; start < allTags.length; start+=data.content.cols){
+        
+        fullElms.push( <tr>
+            {renderRow(start)}
+        </tr>);
+      }
+      return fullElms;
+    }
+
     return (
         <div className="App">
           <ul className="navbar">
@@ -51,26 +89,12 @@ function App() {
           </ul>
           <Grid>
             <Section> notes
-              <Block onClick={focusChild}>
-                <Input childInputRef={childInputRef}/>
-              </Block>
-              <Block onClick={focusChild}><Input childInputRef={childInputRef}/></Block>
-              <Block onClick={focusChild}><Input childInputRef={childInputRef}/></Block>
+              <Block onClick={focusChild} childInputRef={childInputRef}/>
             </Section>
             <Section> detail
               <ThalamGrid>
 
-                {data.content.poorvangam.map((tag) => (tag.type !== "karvai" && tag.type !== "kanakku") 
-                  ? <Tag>{tag.value}</Tag> 
-                  : splitKanakkuTags(tag.sollu, tag.value, tag.type==="karvai"? true : false))}
-
-                {data.content.madhyangam.map((tag) => (tag.type !== "karvai" && tag.type !== "kanakku") 
-                  ? <Tag>{tag.value}</Tag> 
-                  : splitKanakkuTags(tag.sollu, tag.value, tag.type==="karvai"? true : false))}
-
-                {data.content.uttarangam.map((tag) => (tag.type !== "karvai" && tag.type !== "kanakku") 
-                  ? <Tag>{tag.value}</Tag> 
-                  : splitKanakkuTags(tag.sollu, tag.value, tag.type==="karvai"? true : false))}
+                {renderKorvai()}
 
               </ThalamGrid>
             </Section>

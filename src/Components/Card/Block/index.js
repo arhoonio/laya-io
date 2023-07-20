@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import Input from "../../Input"
+
 const Block = styled.div`
     background-color: #e8e4db75;
     border-radius: 4px;
@@ -31,14 +33,17 @@ const Drop = styled.select`
 `
 
 const Index = (props) => {
+
+    const [blockType, setBlockType] = useState('nadai');
+
     return <Block>
         <Drop name="type" id="type">
-            <option value="nadai">nadai</option>
-            <option value="korvai">korvai</option>
-            <option value="theermanam">theermanam</option>
-            <option value="other">other</option>
+            <option onChange={event => setBlockType(event.target.value)} value="nadai">nadai</option>
+            <option onChange={event => setBlockType(event.target.value)} value="korvai">korvai</option>
+            <option onChange={event => setBlockType(event.target.value)} value="theermanam">theermanam</option>
+            <option onChange={event => setBlockType(event.target.value)} value="other">other</option>
         </Drop>
-        {props.children}
+            <Input childInputRef={props.childInputRef}/>
         </Block>; 
 };
 export default Index;

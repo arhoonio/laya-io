@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 
-const Tag = styled.span`
+const Tag = styled.div`
 padding:0.5em;
 display:block;
 position:sticky;
-float:left;
 vertical-align:middle;
 background-color: #3C343110;
-border-radius: 10px;
-margin-right:0.5em;
+border-radius: 5px;
+margin-right:0.25em;
+margin-left:0.25em;
+
 text-align:center;
 word-break: break-all;
 `

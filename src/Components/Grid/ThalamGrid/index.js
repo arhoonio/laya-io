@@ -3,10 +3,10 @@ import styled from "styled-components";
 import data from "../../../Data/korvaiDetail.js";
 
 const ThalamGrid = styled.table`
-    display:grid;
-    grid-template-columns: repeat(${data.content.cols}, 1fr);
+    border:none;
+    border-collapse: collapse;
     table-layout:fixed;
-    grid-row-gap:0.75em;
+    width:100%;
     margin-top:0.5em;
     margin-bottom:1em;
     overflow-wrap: break-word;
