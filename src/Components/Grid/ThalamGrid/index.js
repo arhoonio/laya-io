@@ -6,7 +6,7 @@ const ThalamGrid = styled.table`
     display:grid;
     grid-template-columns: repeat(${data.content.cols}, 1fr);
     table-layout:fixed;
-    grid-row-gap:0.5em;
+    grid-row-gap:0.75em;
     margin-top:0.5em;
     margin-bottom:1em;
     overflow-wrap: break-word;

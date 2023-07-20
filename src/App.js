@@ -20,13 +20,22 @@ function App() {
     
     function splitKanakkuTags(fullSollu, value, karvai) {
 
-      var sollu = fullSollu.split("-");
+      var sollu = fullSollu.length !== 1? fullSollu.split("-") : fullSollu;
       var tags = []
+      var start = true
+      var end = false
+      var lastbutone = false;
 
       for (var i = 0; i < value; i++){
+        end = (i === value - 1)? true:false;
+        lastbutone = (value > 1 && i === value - 2)? true:false;
+        start = (i === 0)? true:false;
         tags.push(<KanakkuTag 
           karvai={karvai} 
-          value={value}>{sollu[i]}
+          value={value}
+          end={end}
+          lastbutone = {lastbutone}
+          start={start}>{sollu[i]}
         </KanakkuTag>); 
       }
 
