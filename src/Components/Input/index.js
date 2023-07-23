@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+// import Tag from '../Tag'
 import './index.css';
 
 
@@ -73,7 +74,7 @@ const Tags = ({childInputRef, props}) => {
 
     const removeTags = index => {
         setTags([...tags.filter(tag => tags.indexOf(tag) !== index)]);
-        };
+    };
 
 
     return (<Input>

@@ -1,9 +1,8 @@
 import React, {useState} from "react";
 import "./App.css";
 import Grid from "./Components/Grid";
-import Block from "./Components/Card/Block";
 import Section from "./Components/Card/Section";
-import Input from "./Components/Input";
+import NoteGrid from "./Components/Grid/NoteGrid";
 import { useRef } from "react";
 import ThalamGrid from "./Components/Grid/ThalamGrid";
 import data from "./Data/korvaiDetail.js";
@@ -89,7 +88,7 @@ function App() {
           </ul>
           <Grid>
             <Section> notes
-              <Block onClick={focusChild} childInputRef={childInputRef}/>
+              <NoteGrid />
             </Section>
             <Section> detail
               <ThalamGrid>

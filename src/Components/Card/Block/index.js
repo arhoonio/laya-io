@@ -43,7 +43,6 @@ const Index = (props) => {
             <option onChange={event => setBlockType(event.target.value)} value="theermanam">theermanam</option>
             <option onChange={event => setBlockType(event.target.value)} value="other">other</option>
         </Drop>
-            <Input childInputRef={props.childInputRef}/>
         </Block>; 
 };
 export default Index;

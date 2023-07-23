@@ -8,13 +8,10 @@ const Section = styled.div`
     padding: 0.75em;
     padding-top: 0.5em;
     padding-bottom: 0;
-    display: block;
+    display: flex;
+    flex-direction:column;
     text-align: left;
-    transition: 0.25s ease-in-out;
     cursor: pointer;
-    :hover {
-        //transition: 0.25s ease-in-out;
-    }
 `;
 const Index = (props) => {
     return <Section>{props.children}</Section>; 
