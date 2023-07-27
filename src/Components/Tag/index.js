@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Tag = styled.span`
-padding:0.3em;
+padding:0.5em;
 display:block;
 position:sticky;
 vertical-align:middle;

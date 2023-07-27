@@ -8,7 +8,7 @@ const Tag = styled.div.attrs(props => ({
     $lastbutone : props.$lastbutone
   }))`
     display:block;
-    padding:0.3em;
+    padding:0.5em;
     position:sticky;
     vertical-align:middle;
     white-space:nowrap;

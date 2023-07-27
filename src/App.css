@@ -38,12 +38,12 @@ h1, h2, h3, p, button {
   color: #3C3431;
 }
 
-/* table {
+table {
   border:none;
   border-collapse: collapse;
 }
 
-table { border: none; border-collapse: collapse; }
+/* table { border: none; border-collapse: collapse;}
 table td { border-left: 2px solid #3c3c3140;  padding-bottom: calc(0.85em/2); padding-top: calc(0.85em/2);} */
 
 .rti--container {
