@@ -6,6 +6,7 @@ const Tag = styled.div.attrs(props => ({
     $start: props.$start,
     $end: props.$end,
     $lastbutone : props.$lastbutone
+    
   }))`
     display:block;
     padding:0.5em;

@@ -1,21 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 import "./App.css";
 import Grid from "./Components/Grid";
 import Section from "./Components/Card/Section";
 import NoteGrid from "./Components/Grid/NoteGrid";
-import { useRef } from "react";
 import ThalamGrid from "./Components/Grid/ThalamGrid";
-import data from "./Data/korvaiDetail.js";
+import data from "./Data/notesData.json";
 import Tag from "./Components/Tag";
 import KanakkuTag from "./Components/KanakkuTag";
 
 function App() {
-
-    const childInputRef = useRef(null);
-
-    const focusChild = () => {
-        childInputRef.current && childInputRef.current.focus()
-      }
     
     function splitKanakkuTags(fullSollu, value, karvai) {
 
@@ -45,18 +38,9 @@ function App() {
 
       var allTags = []
 
-      data.content.poorvangam.map((tag) => (tag.type !== "karvai" && tag.type !== "kanakku") 
+      data.content.tags.map((tag) => (tag.type !== "karvai" && tag.type !== "kanakku") 
       ? allTags.push(<Tag>{tag.value}</Tag>)
       : splitKanakkuTags(tag.sollu, tag.value, tag.type==="karvai"? true : false).map((tag) => allTags.push(tag)))
-
-      data.content.madhyangam.map((tag) => (tag.type !== "karvai" && tag.type !== "kanakku") 
-      ? allTags.push(<Tag>{tag.value}</Tag>)
-      : splitKanakkuTags(tag.sollu, tag.value, tag.type==="karvai"? true : false).map((tag2) => allTags.push(tag2)))
-
-      data.content.uttarangam.map((tag) => (tag.type !== "karvai" && tag.type !== "kanakku") 
-      ? allTags.push(<Tag>{tag.value}</Tag>)
-      : splitKanakkuTags(tag.sollu, tag.value, tag.type==="karvai"? true : false).map((tag2) => allTags.push(tag2)))
-      
     
       function renderRow (start) {
         var rowElms = []
@@ -81,11 +65,7 @@ function App() {
 
     return (
         <div className="App">
-          <ul className="navbar">
-            <li className="logo"><h2>laya.io</h2></li>
-            <li className="navoption"><a href="#">video + audio annotation</a></li>
-            <li className="navoption"><a href="#">about</a></li>
-          </ul>
+          <h2>laya.io</h2>
           <Grid>
             <Section> notes
               <NoteGrid />

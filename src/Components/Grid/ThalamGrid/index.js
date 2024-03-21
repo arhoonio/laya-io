@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import data from "../../../Data/korvaiDetail.js";
+import data from "../../../Data/notesData.json";
 
 const ThalamGrid = styled.table`
     border:none;
