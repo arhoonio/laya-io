@@ -7,8 +7,8 @@ def parseLine(line, section):
     return ret
 
 thalam = input("thalam: ")
-jaathi = int(input("jaathi (# counts in laghu): "))
-gathi = int(input("gathi: "))
+jaathi = int(input("jaathi (# aksharams in laghu): "))
+gathi = int(input("gathi (# subdivisions per aksharam): "))
 laghu = ['|'] + [f'{i+2}' for i in range(jaathi-1)]
 dhrutham = ['|', 'O']
 anudhrutham = ['|']
@@ -66,9 +66,9 @@ info = {
         '(1)': {"P": ["-"],
               "M":["-"],
               "U": ["-"]},
-        '(2)': {"P": ["tham -", "dheem -", "dhin -", "- -"],
-              "M":["tham -", "dheem -", "dhin -", "- -"],
-              "U": ["tham -", "dheem -", "dhin -", "- -"]},
+        '(2)': {"P": ["dhi -", "tham -", "dheem -", "dhin -", "- -"],
+              "M":["dhi -","tham -", "dheem -", "dhin -", "- -"],
+              "U": ["tham -", "dheem -", "dhin -", "dhi -", "- -"]},
         '(3)': {"P": ["thaan - gu", "dheen - gu", "tham - -", "- - -"],
               "M":["thaan - gu", "dheen - gu", "tham - -", "- - -"],
               "U": ["thaan - gu", "dheen - gu", "tham - -", "- - -"]},
@@ -111,7 +111,6 @@ with open(sys.argv[1]) as f:
 
 print(info["thalam-symbols"][thalam])
 print(info["thalam-aks"][thalam])
-print(korvai)
 print("---POORVANGAM---")
 for bol in sollu['P']: print(bol)
 print("---UTTARANGAM---")
