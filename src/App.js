@@ -67,16 +67,14 @@ function App() {
         <div className="App">
           <h2>laya.io</h2>
           <Grid>
-            <Section> notes
               <NoteGrid />
-            </Section>
-            <Section> detail
+            {/* <Section> detail
               <ThalamGrid>
 
                 {renderKorvai()}
 
               </ThalamGrid>
-            </Section>
+            </Section> */}
           </Grid>
         </div>
     );

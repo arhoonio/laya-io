@@ -182,9 +182,10 @@ const Index = (props) => {
     }
 
     
-    return <div style={{backgroundColor: '#3C343109',height:'100%', whiteSpace:'nowrap', position: 'relative', marginTop: '0.075em', marginBottom: '0.75em', 
-    paddingLeft:'0.5em', borderRadius:'4px'}}>
-        <NoteGrid>{renderRows()}</NoteGrid>
-    </div>
+    // return <div style={{backgroundColor: '#3C343109',height:'100%', whiteSpace:'nowrap', position: 'relative', marginTop: '0.075em', marginBottom: '0.75em', 
+    // paddingLeft:'0.5em', borderRadius:'4px'}}>
+    //     <NoteGrid>{renderRows()}</NoteGrid>
+    // </div>
+    return <NoteGrid>{renderRows()}</NoteGrid>
 };
 export default Index;
