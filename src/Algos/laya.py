@@ -1,4 +1,5 @@
 import sys
+import pandas as pd
 
 repeat = False
 to_repeat = []
@@ -51,6 +52,12 @@ def korvai_placed(sollu, symbols, gathi):
         ret+=f"({symbols[last_symbol]})"+ ' ' + ' '.join(sollu[i:i+gathi])+'\n'
     return ret
 
+def korvai_pd_export(sollu, symbols, gathi):
+      df = pd.DataFrame(columns=symbols)
+      for i in range(0, len(sollu), gathi*len(symbols)):
+            df.loc[i] = [' '.join(sollu[i+gathi*j:i+gathi+gathi*j]) for j in range(len(symbols))]
+      df.to_csv(f'{sys.argv[1][:-4]}-results.csv')
+            
 thalam = input("thalam: ")
 jaathi = int(input("jaathi (# aksharams in laghu): "))
 gathi = int(input("gathi (# subdivisions per aksharam): "))
@@ -97,7 +104,7 @@ info = {
         '2': ["tha ka", "ki ta", "tho ka", "thom ka", "kita thaka", "thaka dhina"],
         '3': ["tha ki ta", "ku ku tha"],
         '4': ["tha ka dhi na", "ki ta tha ka", "tha ka dhi mi"],
-        '5': ["tha ka tha ki ta", "tha dhin gi na thom", "thari kita kita thaka naka", "kita thaka thari kita thom-", "thari thari kita kita kum-"],
+        '5': ["tha dhin gi na thom", "tha ka tha ki ta", "tha dhin gi na thom", "thari kita kita thaka naka", "kita thaka thari kita thom-", "thari thari kita kita kum-"],
         '6':  ["tham- kita thaka thari kita thaka", "tha dhin - gi na thom", "tham- kita thaka thom- kita thom-",],
         '7':  ["tha ka dhi mi tha ki ta", "tha - dhin - gi na thom", "tham- kita thaka thaka thari kita thaka", "kita thaka thari kita kita thaka naka",],
         '8':  ["thi- - tham- kita thaka thari kita thaka", "tha dheem - tha dhin gi na thom", "tha ka dhi mi tha ka ja nu", "tham - ki ta tha ka ja nu"],
@@ -121,8 +128,7 @@ with open(sys.argv[1]) as f:
     for line in f:
       split_line = line.strip().split(' ')
       solluList+=parseLine(split_line)
-      
-print(solluList)
+
 print()
 # print("---THALAM INFO---")
 print(f"{info['prefixes'][jaathi]} jaathi {thalam} thalam ({info['prefixes'][gathi]} gathi)")
@@ -135,3 +141,17 @@ print("total aksharams in one avarthanam:", info["thalam-aks"][thalam])
 # print("total aksharams:", korvai["total"])
 print()
 print(korvai_placed(sollu=solluList, symbols=info["thalam-symbols"][thalam], gathi=gathi))
+print("total aksharams:",len(solluList))
+
+with open(f'{sys.argv[1][:-4]}-results.txt', 'x') as f:
+      f.write(f"{info['prefixes'][jaathi]} jaathi {thalam} thalam ({info['prefixes'][gathi]} gathi)\n")
+      f.write('layout: ')
+      for symbol in info["thalam-symbols"][thalam]: f.write(symbol+' ')
+      f.write('\n')
+      f.write(f"total aksharams in one avarthanam: {info['thalam-aks'][thalam]} \n")
+      f.write('\n')
+      f.write(korvai_placed(sollu=solluList, symbols=info['thalam-symbols'][thalam], gathi=gathi))
+      f.write('\n')
+      f.write(f"total aksharams: {len(solluList)}")
+
+korvai_pd_export(sollu=solluList, symbols=info["thalam-symbols"][thalam], gathi=gathi)

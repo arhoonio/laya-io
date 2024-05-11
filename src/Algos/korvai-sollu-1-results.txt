@@ -1,0 +1,38 @@
+chaturasra jaathi triputa thalam (tisra gathi)
+layout: | 2 3 4 | O | O 
+total aksharams in one avarthanam: 48 
+
+(|) tha dheen - gu tha ka
+(2) dheen - gu tha ki ta
+(3) dheen - gu tha dhin gi
+(4) na thom - tha dhin gi
+(|) na thom - tha dhin gi
+(O) na thom tha dheen - gu
+(|) tha dheen - gu tha ka
+(O) dheen - gu tha ka dheen
+(|) - gu tha ki ta dheen
+(2) - gu tha ki ta dheen
+(3) - gu tha dhin gi na
+(4) thom tha dhin gi na thom
+(|) tham - tha dhin gi na
+(O) thom tha dhin gi na thom
+(|) tham - tha dhin gi na
+(O) thom tha dhin gi na thom
+(|) tha dheen - gu tha dheen
+(2) - gu tha dheen - gu
+(3) tha ka dheen - gu tha
+(4) ka dheen - gu tha ka
+(|) dheen - gu tha ki ta
+(O) dheen - gu tha ki ta
+(|) dheen - gu tha ki ta
+(O) dheen - gu tha dhin gi
+(|) na thom tha dhin gi na
+(2) thom tha dhin gi na thom
+(3) thaan - gu tha dhin gi
+(4) na thom tha dhin gi na
+(|) thom tha dhin gi na thom
+(O) thaan - gu tha dhin gi
+(|) na thom tha dhin gi na
+(O) thom tha dhin gi na thom
+
+total aksharams: 192
