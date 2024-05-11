@@ -131,28 +131,13 @@ with open(sys.argv[1]) as f:
       solluList = parseFile(f)
 
 print()
-# print("---THALAM INFO---")
 print(f"{info['prefixes'][jaathi]} jaathi {thalam} thalam ({info['prefixes'][gathi]} gathi)")
 print("layout:", end=' ')
 for symbol in info["thalam-symbols"][thalam]: print(symbol, end=' ')
 print()
 print("total aksharams in one avarthanam:", info["thalam-aks"][thalam])
-# print()
-# print("---KORVAI INFO---")
-# print("total aksharams:", korvai["total"])
 print()
 print(korvai_placed(sollu=solluList, symbols=info["thalam-symbols"][thalam], gathi=gathi))
 print("total aksharams:",len(solluList))
-
-# with open(f'{sys.argv[1][:-4]}-results.txt', 'x') as f:
-#       f.write(f"{info['prefixes'][jaathi]} jaathi {thalam} thalam ({info['prefixes'][gathi]} gathi)\n")
-#       f.write('layout: ')
-#       for symbol in info["thalam-symbols"][thalam]: f.write(symbol+' ')
-#       f.write('\n')
-#       f.write(f"total aksharams in one avarthanam: {info['thalam-aks'][thalam]} \n")
-#       f.write('\n')
-#       f.write(korvai_placed(sollu=solluList, symbols=info['thalam-symbols'][thalam], gathi=gathi))
-#       f.write('\n')
-#       f.write(f"total aksharams: {len(solluList)}")
 
 korvai_pd_export(sollu=solluList, symbols=info["thalam-symbols"][thalam], gathi=gathi)
