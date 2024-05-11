@@ -3,19 +3,7 @@ import sys
 def parseLine(line, section):
     ret = []
     for kanakku in line:
-        if kanakku.isnumeric(): ret.append(info["sollus"][kanakku][section][0])
-        elif '(' in kanakku and ')' in kanakku:
-            if 'x' in kanakku: 
-                  curr = ret
-                  ret = []
-                  for i in range(int(kanakku[2])): ret+=curr
-            else: ret.append(info["sollus"][kanakku][section][0])
-        elif 'x' in kanakku:
-              curr = ret[-1]
-              ret = ret[:len(ret)-1]
-              for i in range(int(kanakku[1])): 
-                  ret.append(curr)
-        else: ret.append(kanakku)
+        ret.append(info["sollus"][kanakku][section][0])
     return ret
 
 def flatten_sollu(sollu):
@@ -33,20 +21,18 @@ def korvai_placed(sollu, symbols, gathi):
     ret = ""
     last_symbol = -1
     flattened = flatten_sollu(sollu)
-    korvai["total"] = len(flattened)
     for i in range(0, len(flattened), gathi):
         if last_symbol+3 > len(symbols):last_symbol=-1
         else: last_symbol+=1
         ret+=f"({symbols[last_symbol]})"+ ' ' + ' '.join(flattened[i:i+gathi])+'\n'
     return ret
 
-thalam = input("thalam: ")
-jaathi = int(input("jaathi (# aksharams in laghu): "))
-gathi = int(input("gathi (# subdivisions per aksharam): "))
+thalam = "triputa"
+jaathi = 4
+gathi = 7
 laghu = ['|'] + [f'{i+2}' for i in range(jaathi-1)]
 dhrutham = ['|', 'O']
 anudhrutham = ['|']
-mode = 'math'
 info = {
     "thalam-symbols" : {
         "triputa" : laghu + dhrutham + dhrutham,
@@ -115,21 +101,21 @@ info = {
         '(1)': {"P": ["-"],
               "M":["-"],
               "U": ["-"]},
-        '(2)': {"P": ["dheem -", "tham -", "dheem -", "dhin -", "- -"],
+        '(2)': {"P": ["dhi -", "tham -", "dheem -", "dhin -", "- -"],
               "M":["dhi -","tham -", "dheem -", "dhin -", "- -"],
               "U": ["tham -", "dheem -", "dhin -", "dhi -", "- -"]},
         '(3)': {"P": ["thaan - gu", "dheen - gu", "tham - -", "- - -"],
               "M":["thaan - gu", "dheen - gu", "tham - -", "- - -"],
               "U": ["thaan - gu", "dheen - gu", "tham - -", "- - -"]},
-        '(4)': {"P": ["dhin - tha -", "tham - tham -", "dheem - dheem -", "- - - -"],
-              "M":["tham - - -", "dheem - - -", "- - - -"],
-              "U": ["tham - - -", "dheem - - -", "- - - -"]},
+        '(4)': {"P": ["tham - tham -", "dheem - dheem -", "- - - -"],
+              "M":["tham - tham -", "dheem - dheem -", "- - - -"],
+              "U": ["tham - tham -", "dheem - dheem -", "- - - -"]},
         '(5)': {"P": ["dhin - thaan - gu", "dhin - dheen - gu", "- - - - -"],
               "M":["dhin - thaan - gu", "dhin - dheen - gu", "- - - - -"],
               "U": ["dhin - thaan - gu", "dhin - dheen - gu", "- - - - -"]},
         '(6)': {"P": ["thaan - gu thaan - gu", "dheen - gu dheen - gu", "tham - tham - tham -"],
               "M":["thaan - gu thaan - gu", "dheen - gu dheen - gu", "tham - tham - tham -"],
-              "U": ["thaan - gu thaan - gu", "dheen - gu dheen - gu", "tha tham - tha tham -", "tham - tham - tham -"]},
+              "U": ["thaan - gu thaan - gu", "dheen - gu dheen - gu", "tham - tham - tham -"]},
         '(7)': {"P": ["dhin - dhin - thaan - gu", "dhin - dhin - dheen - gu"],
               "M":["dhin - dhin - thaan - gu", "dhin - dhin - dheen - gu"],
               "U": ["dhin - dhin - thaan - gu", "dhin - dhin - dheen - gu"]},
@@ -152,20 +138,29 @@ with open(sys.argv[1]) as f:
         if "P" in line:
             section = "P"
             count[section]+=1
+            if section not in korvai.keys(): korvai[section] = {}
             if section not in sollu.keys(): sollu[section] = {}
+            if count[section] not in korvai[section].keys(): korvai[section][count[section]] = []
             if count[section] not in sollu[section].keys(): sollu[section][count[section]] = []
         elif "U" in line:
             section = "U"
             count[section]+=1
-            if section not in sollu.keys(): sollu[section] = {count[section]:[]}
+            if section not in korvai.keys(): korvai[section] = {count[section]:[]}
+            if section not in sollu.keys(): sollu[section] = {count[section]:[]}            
+            if count[section] not in korvai[section].keys(): korvai[section][count[section]] = []
             if count[section] not in sollu[section].keys(): sollu[section][count[section]] = []
         elif "M" in line:
             section = "M"
             count[section]+=1
-            if section not in sollu.keys(): sollu[section] = {count[section]:[]}       
+            if section not in korvai.keys(): korvai[section] = {count[section]:[]}
+            if section not in sollu.keys(): sollu[section] = {count[section]:[]}            
+            if count[section] not in korvai[section].keys(): korvai[section][count[section]] = []
             if count[section] not in sollu[section].keys(): sollu[section][count[section]] = []
         else:
             formatted_line = line.strip().split(' ')
+            valueList = [int(string) for string in line.replace('(','').replace(')','').strip().split(' ')]
+            korvai[section][count[section]] += valueList
+            korvai["total"] += sum(valueList)
             sollu[section][count[section]] += parseLine(formatted_line, section)
 print()
 print("---THALAM INFO---")

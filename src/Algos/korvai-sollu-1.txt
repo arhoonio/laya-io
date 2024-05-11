@@ -1,0 +1,24 @@
+P
+tha dheen - gu 
+tha ka dheen - gu
+tha ki ta dheen - gu
+U
+5 -
+5 -
+5
+P
+tha dheen - gu (x2) 
+tha ka dheen - gu (x2)
+tha ki ta dheen - gu (x2)
+U
+5 5 (2)
+5 5 (2)
+5 5
+P
+tha dheen - gu (x3)
+tha ka dheen - gu (x3)
+tha ki ta dheen - gu (x3)
+U
+5 5 5 (3)
+5 5 5 (3)
+5 5 5
