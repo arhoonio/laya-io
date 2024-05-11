@@ -1,48 +1,51 @@
 import sys
 import pandas as pd
 
-repeat = False
-to_repeat = []
-
-def parseLine(line):
-      global repeat
-      global to_repeat
-      ret = []
-      for kanakku in line:
-            if len(kanakku) == 0: continue
+def parseFile(f):
+      full = []
+      repeat = False
+      to_repeat = []
+      stack = []
+      for line in f:
+            split_line = line.strip().split(' ')
+            ret = []
+            for kanakku in split_line:
+                  if len(kanakku) == 0: continue
             # translate numbers and kaarvais
-            if kanakku.isnumeric() or '(' in kanakku: 
-                  ret+=(info["sollus"][kanakku][0].split(' '))
-                  if repeat: to_repeat+=(info["sollus"][kanakku][0].split(' '))
-            # start repitition
-            elif '[' in kanakku:
-                  # FULL LINE to repeat x times
-                  if 'x' in kanakku: 
-                        curr = ret
-                        ret = []
-                        for i in range(int(kanakku[2])): ret+=curr
-                        continue
-                  # start of phrase to be repeated     
+                  if kanakku.isnumeric() or '(' in kanakku: 
+                        ret+=(info["sollus"][kanakku][0].split(' '))
+                        if repeat: to_repeat+=(info["sollus"][kanakku][0].split(' '))
+                  # start repitition
+                  elif '[' in kanakku:
+                        # FULL LINE to repeat x times
+                        if 'x' in kanakku: 
+                              curr = ret
+                              ret = []
+                              for i in range(int(kanakku[2])): ret+=curr
+                              continue
+                        # start of phrase to be repeated     
+                        else: 
+                              repeat = True
+                              stack.append(len(to_repeat))
+                              if len(kanakku) > 1: 
+                                    without_bracket = kanakku[1:]
+                                    if without_bracket.isnumeric() or '(' in without_bracket:
+                                          ret+=(info["sollus"][without_bracket][0].split(' '))
+                                          to_repeat+=(info["sollus"][without_bracket][0].split(' '))
+                                    else:
+                                          ret.append(without_bracket)
+                                          to_repeat.append(without_bracket)         
+                  # end repitition
+                  elif ']' in kanakku:
+                        for i in range(int(kanakku[-2]) - 1): ret+=to_repeat
+                        to_repeat.clear()
+                        repeat = False
                   else: 
-                        repeat = True
-                        if len(kanakku) > 1: 
-                              without_bracket = kanakku[1:]
-                              if without_bracket.isnumeric() or '(' in without_bracket:
-                                    ret+=(info["sollus"][without_bracket][0].split(' '))
-                                    to_repeat+=(info["sollus"][without_bracket][0].split(' '))
-                              else:
-                                    ret.append(without_bracket)
-                                    to_repeat.append(without_bracket)         
-            # end repitition
-            elif ']' in kanakku:
-                  for i in range(int(kanakku[-2]) - 1): ret+=to_repeat
-                  to_repeat.clear()
-                  repeat = False
-            else: 
-                  ret.append(kanakku)
-                  if repeat: to_repeat.append(kanakku)
-      return ret
-
+                        ret.append(kanakku)
+                        if repeat: to_repeat.append(kanakku)
+            full+=ret
+      return full
+            
 def korvai_placed(sollu, symbols, gathi):
     ret = ""
     last_symbol = -1
@@ -125,9 +128,7 @@ info = {
 
 solluList = []
 with open(sys.argv[1]) as f:
-    for line in f:
-      split_line = line.strip().split(' ')
-      solluList+=parseLine(split_line)
+      solluList = parseFile(f)
 
 print()
 # print("---THALAM INFO---")
