@@ -1,22 +1,45 @@
 import sys
 
+repeat = False
+lines_r = []
+
 def parseLine(line, section):
-    ret = []
-    for kanakku in line:
-        if kanakku.isnumeric(): ret.append(info["sollus"][kanakku][section][0])
-        elif '(' in kanakku and ')' in kanakku:
-            if 'x' in kanakku: 
-                  curr = ret
-                  ret = []
-                  for i in range(int(kanakku[2])): ret+=curr
-            else: ret.append(info["sollus"][kanakku][section][0])
-        elif 'x' in kanakku:
-              curr = ret[-1]
-              ret = ret[:len(ret)-1]
-              for i in range(int(kanakku[1])): 
-                  ret.append(curr)
-        else: ret.append(kanakku)
-    return ret
+      global repeat
+      global lines_r
+      ret = []
+      for idx, kanakku in enumerate(line):
+            # translate numbers and kaarvais
+            if kanakku.isnumeric() or '(' in kanakku: 
+                  ret.append(info["sollus"][kanakku][section][0])
+                  if repeat: lines_r.append(info["sollus"][kanakku][section][0])
+            # start repitition
+            elif '[' in kanakku:
+                  # FULL LINE to repeat x times
+                  if 'x' in kanakku: 
+                        curr = ret
+                        ret = []
+                        for i in range(int(kanakku[2])): ret+=curr
+                        continue
+                  # start of phrase to be repeated     
+                  else: 
+                        repeat = True
+                        if len(kanakku) > 1: 
+                              without_bracket = kanakku[1:]
+                              if without_bracket.isnumeric() or '(' in without_bracket:
+                                    ret.append(info["sollus"][without_bracket][section][0])
+                                    lines_r.append(info["sollus"][without_bracket][section][0])
+                              else:
+                                    ret.append(without_bracket)
+                                    lines_r.append(without_bracket)         
+            # end repitition
+            elif ']' in kanakku:
+                  for i in range(int(kanakku[-2]) - 1): ret+=lines_r
+                  lines_r.clear()
+                  repeat = False
+            else: 
+                  ret.append(kanakku)
+                  if repeat: lines_r.append(kanakku)
+      return ret
 
 def flatten_sollu(sollu):
     ret_raw = []
@@ -75,7 +98,11 @@ info = {
         7: "misra",
         8: "chaturasra",
         9: "sankeerna",
-        10: "kanda"
+        10: "kanda",
+        12: "tisra",
+        14: "misra",
+        16: "chaturasra",
+        18:"sankeerna"
     },
     "sollus" : {
         '1': {"P": ["tha", "dhi", "thom", "nam"],
@@ -168,14 +195,14 @@ with open(sys.argv[1]) as f:
             formatted_line = line.strip().split(' ')
             sollu[section][count[section]] += parseLine(formatted_line, section)
 print()
-print("---THALAM INFO---")
+# print("---THALAM INFO---")
 print(f"{info['prefixes'][jaathi]} jaathi {thalam} thalam ({info['prefixes'][gathi]} gathi)")
 print("layout:", end=' ')
 for symbol in info["thalam-symbols"][thalam]: print(symbol, end=' ')
 print()
 print("total aksharams in one avarthanam:", info["thalam-aks"][thalam])
-print()
-print("---KORVAI INFO---")
-print("total aksharams:", korvai["total"])
+# print()
+# print("---KORVAI INFO---")
+# print("total aksharams:", korvai["total"])
 print()
 print(korvai_placed(sollu=sollu, symbols=info["thalam-symbols"][thalam], gathi=gathi))
