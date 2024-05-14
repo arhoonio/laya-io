@@ -1,0 +1,15 @@
+thalam: jaathi (# aksharams in laghu): gathi (# subdivisions per aksharam): 
+chaturasra jaathi triputa thalam (misra gathi)
+layout: | 2 3 4 | O | O 
+total aksharams in one avarthanam: 56
+
+(|) tha - dhin - gi na thom
+(2) thaan - gu tham - tha -
+(3) dhin - gi na thom thaan -
+(4) gu tham - tham - tha -
+(|) dhin - gi na thom thaan -
+(O) gu tha dhin - gi na thom
+(|) - tha dhin - gi na thom
+(O) - tha dhin - gi na thom
+
+total aksharams: 56

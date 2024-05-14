@@ -1,0 +1,11 @@
+thalam: jaathi (# aksharams in laghu): gathi (# subdivisions per aksharam): 
+chaturasra jaathi triputa thalam (chaturasra gathi)
+layout: | 2 3 4 | O | O 
+total aksharams in one avarthanam: 64
+
+(|) POOP pee EW POOP pee EW bruh bruh
+(2) POOP pee EW POOP pee EW bruh bruh
+(3) POOP pee EW POOP pee EW bruh bruh
+
+total aksharams: 24
+['POOP', 'pee', 'EW', 'POOP', 'pee', 'EW', 'bruh', 'bruh', 'POOP', 'pee', 'EW', 'POOP', 'pee', 'EW', 'bruh', 'bruh', 'POOP', 'pee', 'EW', 'POOP', 'pee', 'EW', 'bruh', 'bruh']
